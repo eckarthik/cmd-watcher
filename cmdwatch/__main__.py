@@ -4,7 +4,7 @@ import argparse
 import sys
 import time
 
-parser = argparse.ArgumentParser(description="Command Watcher Tool", add_help=True, usage="watcher.py -d DELAY [-o OUTPUT_FILE] [-t TIMEOUT] [-s] <cmd>")
+parser = argparse.ArgumentParser(description="Command Watcher Tool", add_help=True, usage="cmdwatch -d DELAY [-o OUTPUT_FILE] [-t TIMEOUT] [-s] <cmd>")
 parser.add_argument("-d", "--delay", help="How long to wait until next check", dest='delay', type=int, required=True)
 parser.add_argument("-o", "--output", help="File where the output should be stored", dest='output_file')
 parser.add_argument("-t", "--timeout", help="For how many seconds should I watch the output", dest='timeout', type=int)
@@ -19,7 +19,7 @@ except:
 delay = args.delay or 3
 output_file = args.output_file or None
 if len(unknown_args) == 0:
-    sys.stderr.write("Pass a command to execute. See watcher.py --help for instructions")
+    sys.stderr.write("Pass a command to execute. Run cmdwatch --help for instructions")
     sys.exit(0)
 command = " ".join(unknown_args)
 timeout = args.timeout or None
