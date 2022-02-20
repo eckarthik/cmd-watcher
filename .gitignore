@@ -1,0 +1,9 @@
+.idea
+**/build
+**/dist
+hideme.egg-info
+.pypirc
+*/__pycache__
+setup.py
+*.txt
+venv/
