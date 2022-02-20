@@ -55,7 +55,15 @@ try:
             sys.stdout.flush()
             time.sleep(delay)
             os.system("cls")
-            if timeout <= 0:
-                break
+            if timeout:
+                if timeout <= 0:
+                    break
 except KeyboardInterrupt:
     sys.stdout.write("Stopping execution")
+
+def main():
+    parser.print_help()
+
+if __name__ == '__main__':
+    args = sys.argv
+    main()
