@@ -4,6 +4,7 @@
 1. There is a change in output
 2. When the time limit exceeds
 
+The output of the command will be shown in the console as well.
 ```
 pip install cmdwatch
 ```
