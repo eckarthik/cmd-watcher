@@ -1,4 +1,4 @@
-# Command Watcher [![Python Badge](https://img.shields.io/badge/-Python-00000??style=flat-square&logo=python&logoColor=FFD43B&color=informational)](https://www.python.org/downloads/)  [![Downloads](https://pepy.tech/badge/hideme)](https://pepy.tech/project/cmd-watcher) [![Downloads](https://pepy.tech/badge/hideme/week)](https://pepy.tech/project/cmd-watcher/week)
+# Command Watcher [![Python Badge](https://img.shields.io/badge/-Python-00000??style=flat-square&logo=python&logoColor=FFD43B&color=informational)](https://www.python.org/downloads/)  [![Downloads](https://pepy.tech/badge/cmdwatch)](https://pepy.tech/project/cmdwatch) [![Downloads](https://pepy.tech/badge/cmdwatch/week)](https://pepy.tech/project/cmdwatch/week)
 
 **cmdwatch** is a CLI tool to watch the output of a given command until certain conditions given by the user are satisfied. The conditions can be
 1. There is a change in output
