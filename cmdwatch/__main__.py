@@ -3,20 +3,23 @@ import os
 import argparse
 import sys
 import time
+import platform
 
-parser = argparse.ArgumentParser(description="Command Watcher Tool", add_help=True, usage="cmdwatch -d DELAY [-o OUTPUT_FILE] [-t TIMEOUT] [-s] <cmd>")
-parser.add_argument("-d", "--delay", help="How long to wait until next check", dest='delay', type=int, required=True)
+parser = argparse.ArgumentParser(description="Command Watcher Tool", add_help=True,
+                                 usage="cmdwatch -d DELAY [-o OUTPUT_FILE] [-t TIMEOUT] [-s] <cmd>")
+parser.add_argument("-d", "--delay", help="How long to wait until next check. Checks every 2 seconds by default",
+                    dest='delay', type=int)
 parser.add_argument("-o", "--output", help="File where the output should be stored", dest='output_file')
 parser.add_argument("-t", "--timeout", help="For how many seconds should I watch the output", dest='timeout', type=int)
 parser.add_argument("-s", "--stop",
                     help="Pass this option if you want to stop checking whenever there is a change in output",
-                    dest='stop',action='store_true')
+                    dest='stop', action='store_true')
 try:
     args, unknown_args = parser.parse_known_args()
-except:
+except Exception:
     parser.print_help()
     sys.exit(0)
-delay = args.delay or 3
+delay = args.delay or 2
 output_file = args.output_file or None
 if len(unknown_args) == 0:
     sys.stderr.write("Pass a command to execute. Run cmdwatch --help for instructions")
@@ -28,7 +31,12 @@ try:
     while True:
         if timeout:
             timeout = timeout - delay
-        command_output = subprocess.check_output(command, shell=True).decode("utf-8")
+        command_output = None
+        try:
+            command_output = subprocess.check_output(command, shell=True).decode("utf-8")
+        except subprocess.CalledProcessError as e:
+            sys.stdout.write(str(e))
+            break
         if args.stop:
             # User wants to run only when the output is different everytime
             if command_output != previous_output:
@@ -54,15 +62,20 @@ try:
                 fo.close()
             sys.stdout.flush()
             time.sleep(delay)
-            os.system("cls")
+            if platform.system() == 'Windows':
+                os.system("cls")
+            else:
+                os.system("clear")
             if timeout:
                 if timeout <= 0:
                     break
 except KeyboardInterrupt:
     sys.stdout.write("Stopping execution")
 
+
 def main():
     parser.print_help()
+
 
 if __name__ == '__main__':
     args = sys.argv
